@@ -140,6 +140,23 @@ InvalidStartState:
 
 The [examples](/examples) folder contains additional workflows.
 
+## State logging support
+
+`StateMachine` subclasses may implement a state logger `on_state_change` that will
+be called just after the new state is entered:
+
+```py
+class TurnstileWithLog(Turnstile):
+    def __init__(self):
+        super().__init__()
+        self.history = [self.state]
+
+    def on_state_change(self, state):
+        assert self.state == state
+        if self.history[-1] != state:
+            self.history.append(state)
+```
+
 ## Asynchronous Support
 
 `finite-state-machine` can be used to build

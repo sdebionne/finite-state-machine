@@ -15,10 +15,10 @@ class StateMachine:
             raise ValueError("Need to set a state instance variable")
 
     def _update_state(self, state):
-        self.on_state_change(self.state, state)
         self.state = state
+        self.on_state_change(state)
 
-    def on_state_change(self, source, target):
+    def on_state_change(self, state):
         pass
 
 

@@ -6,6 +6,7 @@ class TurnstileWithLog(Turnstile):
         super().__init__()
         self.history = [self.state]
 
-    def on_state_change(self, source, target):
-        if source != target:
-            self.history.append(target)
+    def on_state_change(self, state):
+        assert self.state == state
+        if self.history[-1] != state:
+            self.history.append(state)
